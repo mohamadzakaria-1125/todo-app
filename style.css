@@ -65,6 +65,19 @@ body {
   background: var(--primary-hover);
 }
 
+.btn-danger {
+  padding: 6px 12px;
+  font-size: 0.875rem;
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
 /* ===== Add task form ===== */
 .task-form {
   display: flex;
