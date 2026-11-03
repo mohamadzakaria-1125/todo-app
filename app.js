@@ -40,6 +40,11 @@ function renderTasks() {
     text.className = "task-text";
     text.textContent = task.text;
 
+    const editBtn = document.createElement("button");
+    editBtn.className = "btn btn-secondary";
+    editBtn.textContent = "Edit";
+    editBtn.addEventListener("click", () => startEdit(task.id, li));
+
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "btn btn-danger";
     deleteBtn.textContent = "Delete";
@@ -47,6 +52,7 @@ function renderTasks() {
 
     li.appendChild(checkbox);
     li.appendChild(text);
+    li.appendChild(editBtn);
     li.appendChild(deleteBtn);
     list.appendChild(li);
   });
@@ -78,6 +84,42 @@ function deleteTask(id) {
   tasks = tasks.filter((t) => t.id !== id);
   saveTasks();
   renderTasks();
+}
+
+// ===== Edit a task =====
+// Replaces the task text with an input box.
+// Enter or clicking away = save, Escape = cancel.
+function startEdit(id, li) {
+  const task = tasks.find((t) => t.id === id);
+  const textEl = li.querySelector(".task-text");
+
+  const editInput = document.createElement("input");
+  editInput.type = "text";
+  editInput.className = "task-input edit-input";
+  editInput.value = task.text;
+
+  li.replaceChild(editInput, textEl);
+  editInput.focus();
+  editInput.select();
+
+  let finished = false;
+  function finishEdit(save) {
+    if (finished) return;
+    finished = true;
+
+    const newText = editInput.value.trim();
+    if (save && newText !== "") {
+      task.text = newText;
+      saveTasks();
+    }
+    renderTasks();
+  }
+
+  editInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") finishEdit(true);
+    if (event.key === "Escape") finishEdit(false);
+  });
+  editInput.addEventListener("blur", () => finishEdit(true));
 }
 
 form.addEventListener("submit", (event) => {

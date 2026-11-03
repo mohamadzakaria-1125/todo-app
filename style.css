@@ -65,6 +65,19 @@ body {
   background: var(--primary-hover);
 }
 
+.btn-secondary {
+  padding: 6px 12px;
+  font-size: 0.875rem;
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
 .btn-danger {
   padding: 6px 12px;
   font-size: 0.875rem;
@@ -121,6 +134,10 @@ body {
 .task-text {
   flex: 1;
   word-break: break-word;
+}
+
+.edit-input {
+  padding: 6px 10px;
 }
 
 /* ===== Completed tasks ===== */
