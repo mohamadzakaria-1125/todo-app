@@ -46,11 +46,68 @@ body {
   color: var(--muted);
 }
 
+/* ===== Buttons ===== */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+/* ===== Add task form ===== */
+.task-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.task-input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+}
+
+.task-input:focus {
+  outline: 2px solid var(--primary);
+  border-color: transparent;
+}
+
 /* ===== Task list ===== */
 .task-list {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-text {
+  flex: 1;
+  word-break: break-word;
 }
 
 .empty-message {

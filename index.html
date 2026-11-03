@@ -13,7 +13,17 @@
         <p class="subtitle">Stay organized, one task at a time.</p>
       </header>
 
-      <!-- Features will be added here, one branch at a time -->
+      <form id="task-form" class="task-form">
+        <input
+          id="task-input"
+          class="task-input"
+          type="text"
+          placeholder="What do you need to do?"
+          autocomplete="off"
+          required
+        />
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
 
       <ul id="task-list" class="task-list"></ul>
       <p id="empty-message" class="empty-message">No tasks yet.</p>
