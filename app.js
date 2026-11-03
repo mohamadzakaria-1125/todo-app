@@ -7,10 +7,12 @@ const form = document.getElementById("task-form");
 const input = document.getElementById("task-input");
 const list = document.getElementById("task-list");
 const emptyMessage = document.getElementById("empty-message");
+const filterButtons = document.querySelectorAll(".filter-btn");
 
 // ===== State =====
 // Each task looks like: { id: 1730000000000, text: "Buy milk", completed: false }
 let tasks = loadTasks();
+let currentFilter = "all"; // "all" | "pending" | "completed"
 
 // ===== Storage =====
 function loadTasks() {
@@ -26,7 +28,9 @@ function saveTasks() {
 function renderTasks() {
   list.innerHTML = "";
 
-  tasks.forEach((task) => {
+  const visibleTasks = getFilteredTasks();
+
+  visibleTasks.forEach((task) => {
     const li = document.createElement("li");
     li.className = task.completed ? "task-item completed" : "task-item";
 
@@ -57,8 +61,25 @@ function renderTasks() {
     list.appendChild(li);
   });
 
-  emptyMessage.hidden = tasks.length > 0;
+  emptyMessage.hidden = visibleTasks.length > 0;
+  emptyMessage.textContent =
+    tasks.length === 0 ? "No tasks yet." : "No tasks in this filter.";
 }
+
+// ===== Filter tasks =====
+function getFilteredTasks() {
+  if (currentFilter === "pending") return tasks.filter((t) => !t.completed);
+  if (currentFilter === "completed") return tasks.filter((t) => t.completed);
+  return tasks;
+}
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    currentFilter = button.dataset.filter;
+    filterButtons.forEach((b) => b.classList.toggle("active", b === button));
+    renderTasks();
+  });
+});
 
 // ===== Add a new task =====
 function addTask(text) {
