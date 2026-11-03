@@ -129,6 +129,14 @@ body {
   padding: 24px 0;
 }
 
+/* ===== Footer ===== */
+.app-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 480px) {
   .app {
