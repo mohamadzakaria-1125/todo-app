@@ -40,8 +40,14 @@ function renderTasks() {
     text.className = "task-text";
     text.textContent = task.text;
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "btn btn-danger";
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => deleteTask(task.id));
+
     li.appendChild(checkbox);
     li.appendChild(text);
+    li.appendChild(deleteBtn);
     list.appendChild(li);
   });
 
@@ -63,6 +69,13 @@ function addTask(text) {
 function toggleTask(id) {
   const task = tasks.find((t) => t.id === id);
   task.completed = !task.completed;
+  saveTasks();
+  renderTasks();
+}
+
+// ===== Delete a task =====
+function deleteTask(id) {
+  tasks = tasks.filter((t) => t.id !== id);
   saveTasks();
   renderTasks();
 }
