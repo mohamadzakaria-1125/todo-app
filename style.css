@@ -110,6 +110,19 @@ body {
   word-break: break-word;
 }
 
+/* ===== Completed tasks ===== */
+.task-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--success);
+  cursor: pointer;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
 .empty-message {
   text-align: center;
   color: var(--muted);

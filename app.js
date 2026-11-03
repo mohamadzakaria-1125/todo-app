@@ -28,12 +28,19 @@ function renderTasks() {
 
   tasks.forEach((task) => {
     const li = document.createElement("li");
-    li.className = "task-item";
+    li.className = task.completed ? "task-item completed" : "task-item";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.className = "task-checkbox";
+    checkbox.checked = task.completed;
+    checkbox.addEventListener("change", () => toggleTask(task.id));
 
     const text = document.createElement("span");
     text.className = "task-text";
     text.textContent = task.text;
 
+    li.appendChild(checkbox);
     li.appendChild(text);
     list.appendChild(li);
   });
@@ -48,6 +55,14 @@ function addTask(text) {
     text: text,
     completed: false,
   });
+  saveTasks();
+  renderTasks();
+}
+
+// ===== Mark a task as completed =====
+function toggleTask(id) {
+  const task = tasks.find((t) => t.id === id);
+  task.completed = !task.completed;
   saveTasks();
   renderTasks();
 }
